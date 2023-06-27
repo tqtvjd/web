@@ -73,59 +73,68 @@ styles.innerHTML = `
 document.head.appendChild(styles);
 
 // 创建 floatingButton 元素
-var floatingButton = document.createElement("button");
-floatingButton.id = "floatingButton";
-floatingButton.textContent = "日志";
-document.body.appendChild(floatingButton);
+var floatingButton;
 
-// 获取其他元素
-var logWindow = document.getElementById("logWindow");
-var logContent = document.getElementById("logContent");
-var closeButton = document.getElementById("closeButton");
+function openLog() {
 
-// 设置按钮的拖拽功能
-var isDragging = false;
-var offsetX = 0;
-var offsetY = 0;
-
-floatingButton.addEventListener("mousedown", function (e) {
-    isDragging = true;
-    offsetX = e.clientX - floatingButton.offsetLeft;
-    offsetY = e.clientY - floatingButton.offsetTop;
-});
-
-document.addEventListener("mousemove", function (e) {
-    if (isDragging) {
-        floatingButton.style.left = e.clientX - offsetX + "px";
-        floatingButton.style.top = e.clientY - offsetY + "px";
+    if(floatingButton) {
+        return;
     }
-});
-
-document.addEventListener("mouseup", function () {
-    isDragging = false;
-});
-
-// 点击按钮显示/隐藏日志窗口
-floatingButton.addEventListener("click", function () {
-    if (logWindow.style.display == "block") {
+    
+    floatingButton = document.createElement("button");
+    floatingButton.id = "floatingButton";
+    floatingButton.textContent = "日志";
+    document.body.appendChild(floatingButton);
+    
+    // 获取其他元素
+    var logWindow = document.getElementById("logWindow");
+    var closeButton = document.getElementById("closeButton");
+    
+    // 设置按钮的拖拽功能
+    var isDragging = false;
+    var offsetX = 0;
+    var offsetY = 0;
+    
+    floatingButton.addEventListener("mousedown", function (e) {
+        isDragging = true;
+        offsetX = e.clientX - floatingButton.offsetLeft;
+        offsetY = e.clientY - floatingButton.offsetTop;
+    });
+    
+    document.addEventListener("mousemove", function (e) {
+        if (isDragging) {
+            floatingButton.style.left = e.clientX - offsetX + "px";
+            floatingButton.style.top = e.clientY - offsetY + "px";
+        }
+    });
+    
+    document.addEventListener("mouseup", function () {
+        isDragging = false;
+    });
+    
+    // 点击按钮显示/隐藏日志窗口
+    floatingButton.addEventListener("click", function () {
+        if (logWindow.style.display == "block") {
+            logWindow.style.display = "none";
+        } else {
+            logWindow.style.display = "block";
+        }
+    });
+    
+    closeButton.addEventListener("click", function () {
         logWindow.style.display = "none";
-    } else {
-        logWindow.style.display = "block";
-    }
-});
-
-closeButton.addEventListener("click", function () {
-    logWindow.style.display = "none";
-});
-
+    });
+}
 // 示例：添加一条日志
 function addLog(message) {
+    var logContent = document.getElementById("logContent");
     var logItem = document.createElement("span");
     logItem.innerHTML = `<span style="color: #7788ee;">[${formatDate("hh:mm:ss")}]</span>${message}<br>`;
     logContent.appendChild(logItem);
 }
 
 function setLog(message) {
+    var logContent = document.getElementById("logContent");
     logContent.innerHTML = `<span style="color: #7788ee;">[${formatDate("hh:mm:ss")}]</span>${message}<br>`;
 }
 
