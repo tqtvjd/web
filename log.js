@@ -125,6 +125,10 @@ function addLog(message) {
     logContent.appendChild(logItem);
 }
 
+function setLog(message) {
+    logContent.innerHTML = `<span style="color: #7788ee;">[${formatDate("hh:mm:ss")}]</span>${message}<br>`;
+}
+
 function formatDate(format) {
     var currentDate = new Date();
 
