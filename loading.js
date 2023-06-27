@@ -7,7 +7,7 @@ styleElement.textContent = `
         transform: translate(-50%, -50%);
         background-color: rgba(0, 0, 0, 0.8);
         color: #fff;
-        padding: 20px;
+        padding: 10px 14px;
         border-radius: 16px;
         display: flex;
         flex-direction: column;
@@ -54,10 +54,15 @@ document.head.appendChild(styleElement);
 let loadingElement;
 let toastElement;
 
+let loadingTimer;
+let loadingSenconds = 0;
+
 // showLoading方法用于显示loading界面
 function showLoading(text) {
     // 如果loading元素已存在，则直接返回
     if (loadingElement) return;
+
+    loadingSenconds = 0;
 
     // 创建loading元素
     loadingElement = document.createElement('div');
@@ -78,12 +83,26 @@ function showLoading(text) {
     // 将文本元素添加到loading元素中
     loadingElement.appendChild(textElement);
 
+    if (loadingTimer) {
+        clearInterval(loadingTimer);
+    }
+
+    loadingTimer = setInterval(() => {
+        loadingSenconds++;
+        if (textElement) {
+            textElement.innerHTML = `${text}[${loadingSenconds}秒]`;
+        }
+    }, 1000);
+
     // 将loading元素添加到body中
     document.body.appendChild(loadingElement);
 }
 
 // hideLoading方法用于隐藏loading界面
 function hideLoading() {
+    if (loadingTimer) {
+        clearInterval(loadingTimer);
+    }
     // 如果loading元素存在，则移除它
     if (loadingElement) {
         document.body.removeChild(loadingElement);
