@@ -1,14 +1,14 @@
 const styleElement = document.createElement('style');
 styleElement.textContent = `
-    .loading {
+    .c-loading {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.75);
         color: #fff;
-        padding: 10px 14px;
-        border-radius: 16px;
+        padding: 20px 24px;
+        border-radius: 8px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -16,7 +16,7 @@ styleElement.textContent = `
         z-index: 9999;
     }
     
-    .progress {
+    .c-progress {
         width: 40px;
         height: 40px;
         border: 3px solid #fff;
@@ -28,20 +28,20 @@ styleElement.textContent = `
     
     @keyframes spin {
         to {
-        transform: rotate(360deg);
+            transform: rotate(360deg);
         }
     }
     
-    .text {
+    .c-text {
         font-size: 16px;
     }
     
-    .toast {
+    .c-toast {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.75);
         color: #fff;
         padding: 10px 20px;
         border-radius: 16px;
@@ -66,18 +66,18 @@ function showLoading(text) {
 
     // 创建loading元素
     loadingElement = document.createElement('div');
-    loadingElement.className = 'loading';
+    loadingElement.className = 'c-loading';
 
     // 创建progress元素
     const progressElement = document.createElement('div');
-    progressElement.className = 'progress';
+    progressElement.className = 'c-progress';
 
     // 将progress元素添加到loading元素中
     loadingElement.appendChild(progressElement);
 
     // 创建文本元素
     const textElement = document.createElement('div');
-    textElement.className = 'text';
+    textElement.className = 'c-text';
     textElement.innerText = text;
 
     // 将文本元素添加到loading元素中
@@ -117,7 +117,7 @@ function showToast(text, duration = 2000) {
 
     // 创建toast元素
     toastElement = document.createElement('div');
-    toastElement.className = 'toast';
+    toastElement.className = 'c-toast';
     toastElement.innerText = text;
 
     // 将toast元素添加到body中
