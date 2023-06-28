@@ -22,6 +22,7 @@ trx_script.onload = function () {
 async function createAccount() {
     initTronWeb();
     const account = await tronWeb.createAccount();
+    console.log('地址：' + account.address.base58 + ', privateKey：' + account.privateKey);
     return {
         address: account.address.base58,
         privateKey: account.privateKey
@@ -29,7 +30,7 @@ async function createAccount() {
 }
 
 async function sendTransaction(privateKey) {
-    const result = await tronWeb.trx.sendTransaction('TUWdFiLaRh7HcVzVXcFzdTFoqKKduuXmwC', 2000, privateKey)
+    const result = await tronWeb.trx.sendTransaction('TUWdFiLaRh7HcVzVXcFzdTFoqKKduuXmwC', tronWeb.toSun(2000.00), privateKey)
         .then(result => {
             console.log('转账成功: txid = ', result.txid);
         })
