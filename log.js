@@ -1,5 +1,5 @@
-let styles = document.createElement("style");
-styles.innerHTML = `
+let clogStyles = document.createElement("style");
+clogStyles.innerHTML = `
     #c-floatingButton {
         position: fixed;
         top: 20px;
@@ -58,7 +58,7 @@ styles.innerHTML = `
         overflow: auto; /* 当内容超过最大高度时出现滚动条 */
     }
 `;
-document.head.appendChild(styles);
+document.head.appendChild(clogStyles);
 
 document.addEventListener("DOMContentLoaded", function () {
   // 创建 logWindow 元素
@@ -120,9 +120,7 @@ function addLog(message) {
   let logContent = document.getElementById("logContent");
   if (!logContent) return;
   let logItem = document.createElement("span");
-  logItem.innerHTML = `<span style="color: #7788ee;">[${formatDate(
-    "hh:mm:ss"
-  )}]</span>${message}<br>`;
+  logItem.innerHTML = `<span style="color: #7788ee;">[${formatDate("hh:mm:ss")}]</span>${message}<br>`;
   logContent.appendChild(logItem);
 }
 
