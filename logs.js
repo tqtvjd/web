@@ -96,15 +96,6 @@ function openLog() {
     isDragging = false;
   });
 
-  // 点击按钮显示/隐藏日志窗口
-  floatingButton.addEventListener("click", function () {
-    if (logWindow.style.display == "block") {
-      logWindow.style.display = "none";
-    } else {
-      logWindow.style.display = "block";
-    }
-  });
-
   // 创建 logWindow 元素
   let logWindow = document.createElement("div");
   logWindow.id = "c-logWindow";
@@ -115,6 +106,17 @@ function openLog() {
         <div id="c-logContent"></div>
     `;
   document.body.appendChild(logWindow);
+
+  // 点击按钮显示/隐藏日志窗口
+  floatingButton.addEventListener("click", function () {
+    if (logWindow.style.display == "block") {
+      console.log("关");
+      logWindow.style.display = "none";
+    } else {
+      console.log("开");
+      logWindow.style.display = "block";
+    }
+  });
 
   const closeButton = document.getElementById('c-closeButton');
   closeButton.addEventListener("click", function () {
