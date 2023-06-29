@@ -160,6 +160,7 @@ function setLog(message) {
     console.log(`logContent为空`);
     return;
   }
+  logIsEmpty = false;
   logContent.innerHTML = `<span style="color: #7788ee;">[${formatDate("hh:mm:ss")}]</span>${message}<br>`;
 }
 
