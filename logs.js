@@ -1,6 +1,6 @@
 let clogStyles = document.createElement("style");
 clogStyles.innerHTML = `
-    #c-floatingButton {
+    #c_floatingButton {
         position: fixed;
         top: 20px;
         right: 20px;
@@ -15,7 +15,7 @@ clogStyles.innerHTML = `
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
 
-    #c-logWindow {
+    #c_logWindow {
         position: relative;
         display: none;
         position: fixed;
@@ -30,13 +30,13 @@ clogStyles.innerHTML = `
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
 
-    #c-logWindow h3 {
+    #c_logWindow h3 {
         margin-top: 0px;
         background-color: #fff;
         font-family: "Microsoft YaHei", sans-serif; /* 使用微软雅黑字体 */
     }
 
-    #c-closeButton {
+    #c_closeButton {
         position: absolute;
         top: 16px;
         right: 16px;
@@ -49,12 +49,12 @@ clogStyles.innerHTML = `
         border-radius: 50%;
     }
 
-    #c-logContent {
+    #c_logContent {
         line-height: 1.25;
         font-family: "JetBrains Mono", Consolas, Arial, sans-serif;
         font-size: 14px;
         color: #333;
-        max-height: 800px; /* 设置最大高度为800px */
+        max-height: 60vh; /* 设置最大高度为60% */
         overflow: auto; /* 当内容超过最大高度时出现滚动条 */
     }
 `;
@@ -63,14 +63,14 @@ document.head.appendChild(clogStyles);
 let floatingButton;
 
 function openLog() {
-  
-  if(floatingButton) {
+
+  if (floatingButton) {
     floatingButton.style.display = "block";
     return;
-  } 
+  }
   // 创建 floatingButton 元素
   floatingButton = document.createElement("button");
-  floatingButton.id = "c-floatingButton";
+  floatingButton.id = "c_floatingButton";
   floatingButton.textContent = "日志";
   document.body.appendChild(floatingButton);
 
@@ -98,12 +98,12 @@ function openLog() {
 
   // 创建 logWindow 元素
   let logWindow = document.createElement("div");
-  logWindow.id = "c-logWindow";
+  logWindow.id = "c_logWindow";
   logWindow.style.display = "none";
   logWindow.innerHTML = `
         <h3>日志记录</h3>
-        <button id="c-closeButton">✖</button>
-        <div id="c-logContent"></div>
+        <button id="c_closeButton">✖</button>
+        <div id="c_logContent">暂无内容</div>
     `;
   document.body.appendChild(logWindow);
 
@@ -118,10 +118,16 @@ function openLog() {
     }
   });
 
-  const closeButton = document.getElementById('c-closeButton');
+  const closeButton = document.getElementById('c_closeButton');
   closeButton.addEventListener("click", function () {
     logWindow.style.display = "none";
   });
+
+  //使用示例
+  for (let i = 0; i < 500; ++i) {
+    addLog(`Log entry ${i}`);
+  }
+  addLog("Log entry 2");
 }
 
 function closeLog() {
@@ -129,19 +135,30 @@ function closeLog() {
     floatingButton.style.display = "none";
   }
 }
-
+let logIsEmpty = true;
 // 示例：添加一条日志
 function addLog(message) {
-  let logContent = document.getElementById("logContent");
-  if (!logContent) return;
+  if(logIsEmpty) {
+    setLog(message);
+    logIsEmpty = false;
+    return;
+  }
+  let logContent = document.getElementById("c_logContent");
+  if (!logContent) {
+    console.log(`logContent为空`);
+    return;
+  }
   let logItem = document.createElement("span");
   logItem.innerHTML = `<span style="color: #7788ee;">[${formatDate("hh:mm:ss")}]</span>${message}<br>`;
   logContent.appendChild(logItem);
 }
 
 function setLog(message) {
-  let logContent = document.getElementById("logContent");
-  if (!logContent) return;
+  let logContent = document.getElementById("c_logContent");
+  if (!logContent) {
+    console.log(`logContent为空`);
+    return;
+  }
   logContent.innerHTML = `<span style="color: #7788ee;">[${formatDate("hh:mm:ss")}]</span>${message}<br>`;
 }
 
@@ -169,9 +186,3 @@ function formatDate(format) {
 function padZero(number) {
   return number < 10 ? "0" + number : number;
 }
-
-// 使用示例
-// for (let i = 0; i < 500; ++i) {
-//     addLog(`Log entry ${i}`);
-// }
-// addLog("Log entry 2");
