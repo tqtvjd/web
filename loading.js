@@ -1,5 +1,5 @@
-const styleElement = document.createElement('style');
-styleElement.textContent = `
+const cloadingStyle = document.createElement('style');
+cloadingStyle.textContent = `
     .c-loading {
         position: fixed;
         top: 50%;
@@ -48,7 +48,7 @@ styleElement.textContent = `
         z-index: 9999;
     }
 `;
-document.head.appendChild(styleElement);
+document.head.appendChild(cloadingStyle);
 
 // 创建全局变量用于存储loading和toast元素
 let loadingElement;
@@ -60,8 +60,10 @@ let loadingSenconds = 0;
 // showLoading方法用于显示loading界面
 function showLoading(text) {
     // 如果loading元素已存在，则直接返回
-    if (loadingElement) return;
-
+    if (loadingElement) {
+        textElement.innerText = text;
+        return;
+    }
     loadingSenconds = 0;
 
     // 创建loading元素
@@ -110,21 +112,23 @@ function hideLoading() {
     }
 }
 
+let toastTimeoutId;
+
 // showToast方法用于显示toast消息
 function showToast(text, duration = 2000) {
-    // 如果toast元素已存在，则直接返回
-    if (toastElement) return;
-
-    // 创建toast元素
-    toastElement = document.createElement('div');
-    toastElement.className = 'c-toast';
+    if(!toastElement) {
+        // 创建toast元素
+        toastElement = document.createElement('div');
+        toastElement.className = 'c-toast';
+        // 将toast元素添加到body中
+        document.body.appendChild(toastElement);
+    }
     toastElement.innerText = text;
-
-    // 将toast元素添加到body中
-    document.body.appendChild(toastElement);
-
+    if(toastTimeoutId) {
+        clearTimeout(toastTimeoutId);
+    }
     // 2秒后隐藏toast
-    setTimeout(() => {
+    toastTimeoutId = setTimeout(() => {
         hideToast();
     }, duration);
 }
