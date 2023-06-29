@@ -51,6 +51,7 @@ clogStyles.innerHTML = `
 
     #c_logContent {
         line-height: 1.25;
+        margin-top: 14px;
         font-family: "JetBrains Mono", Consolas, Arial, sans-serif;
         font-size: 14px;
         color: #333;
