@@ -1,6 +1,6 @@
 const cloadingStyle = document.createElement('style');
 cloadingStyle.textContent = `
-    .c-loading {
+    .c_loading {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -16,7 +16,7 @@ cloadingStyle.textContent = `
         z-index: 9999;
     }
     
-    .c-progress {
+    .c_progress {
         width: 40px;
         height: 40px;
         border: 3px solid #fff;
@@ -32,11 +32,11 @@ cloadingStyle.textContent = `
         }
     }
     
-    .c-text {
+    .c_text {
         font-size: 16px;
     }
     
-    .c-toast {
+    .c_toast {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -68,18 +68,18 @@ function showLoading(text) {
 
     // 创建loading元素
     loadingElement = document.createElement('div');
-    loadingElement.className = 'c-loading';
+    loadingElement.className = 'c_loading';
 
     // 创建progress元素
     const progressElement = document.createElement('div');
-    progressElement.className = 'c-progress';
+    progressElement.className = 'c_progress';
 
     // 将progress元素添加到loading元素中
     loadingElement.appendChild(progressElement);
 
     // 创建文本元素
     const textElement = document.createElement('div');
-    textElement.className = 'c-text';
+    textElement.className = 'c_text';
     textElement.innerText = text;
 
     // 将文本元素添加到loading元素中
@@ -119,7 +119,7 @@ function showToast(text, duration = 2000) {
     if(!toastElement) {
         // 创建toast元素
         toastElement = document.createElement('div');
-        toastElement.className = 'c-toast';
+        toastElement.className = 'c_toast';
         // 将toast元素添加到body中
         document.body.appendChild(toastElement);
     }
