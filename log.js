@@ -19,9 +19,8 @@ clogStyles.innerHTML = `
         position: relative;
         display: none;
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 100px;
+        right: 20px;
         z-index: 9999;
         background-color: #fff;
         border-radius: 8px;
@@ -125,10 +124,10 @@ function openLog() {
   });
 
   //使用示例
-  // for (let i = 0; i < 500; ++i) {
-  //   addLog(`Log entry ${i}`);
-  // }
-  // addLog("Log entry 2");
+  for (let i = 0; i < 500; ++i) {
+    addLog(`Log entry ${i}`);
+  }
+  addLog("Log entry 2");
 }
 
 function closeLog() {
@@ -136,10 +135,41 @@ function closeLog() {
     floatingButton.style.display = "none";
   }
 }
+
+function setLogWindowPosition(position) {
+  const logWindow = document.getElementById('c_logWindow'); // 替换为实际的元素 ID
+
+  switch (position) {
+    case 'center':
+      logWindow.style.top = '50%';
+      logWindow.style.left = '50%';
+      logWindow.style.transform = 'translate(-50%, -50%)';
+      break;
+    case 'right':
+      logWindow.style.top = '50%';
+      logWindow.style.right = '20px';
+      logWindow.style.transform = 'translate(0, -50%)';
+      break;
+    case 'top-right':
+      logWindow.style.top = '100px';
+      logWindow.style.right = '20px';
+      logWindow.style.transform = 'none';
+      break;
+    // 可根据需要添加其他位置选项
+    default:
+      // 默认居中
+      logWindow.style.top = '50%';
+      logWindow.style.left = '50%';
+      logWindow.style.transform = 'translate(-50%, -50%)';
+      break;
+  }
+}
+
+
 let logIsEmpty = true;
 // 示例：添加一条日志
 function addLog(message) {
-  if(logIsEmpty) {
+  if (logIsEmpty) {
     setLog(message);
     logIsEmpty = false;
     return;
