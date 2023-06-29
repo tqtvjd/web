@@ -60,20 +60,16 @@ clogStyles.innerHTML = `
 `;
 document.head.appendChild(clogStyles);
 
-document.addEventListener("DOMContentLoaded", function () {
-  // 创建 logWindow 元素
-  let logWindow = document.createElement("div");
-  logWindow.id = "c-logWindow";
-  logWindow.style.display = "none";
-  logWindow.innerHTML = `
-        <h3>日志记录</h3>
-        <button id="c-closeButton">✖</button>
-        <div id="c-logContent"></div>
-    `;
-  document.body.appendChild(logWindow);
+let floatingButton;
 
+function openLog() {
+  
+  if(floatingButton) {
+    floatingButton.style.display = "block";
+    return;
+  } 
   // 创建 floatingButton 元素
-  const floatingButton = document.createElement("button");
+  floatingButton = document.createElement("button");
   floatingButton.id = "c-floatingButton";
   floatingButton.textContent = "日志";
   document.body.appendChild(floatingButton);
@@ -109,11 +105,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // 创建 logWindow 元素
+  let logWindow = document.createElement("div");
+  logWindow.id = "c-logWindow";
+  logWindow.style.display = "none";
+  logWindow.innerHTML = `
+        <h3>日志记录</h3>
+        <button id="c-closeButton">✖</button>
+        <div id="c-logContent"></div>
+    `;
+  document.body.appendChild(logWindow);
+
   const closeButton = document.getElementById('c-closeButton');
   closeButton.addEventListener("click", function () {
     logWindow.style.display = "none";
   });
-});
+}
+
+function closeLog() {
+  if (floatingButton) {
+    floatingButton.style.display = "none";
+  }
+}
 
 // 示例：添加一条日志
 function addLog(message) {
@@ -127,9 +140,7 @@ function addLog(message) {
 function setLog(message) {
   let logContent = document.getElementById("logContent");
   if (!logContent) return;
-  logContent.innerHTML = `<span style="color: #7788ee;">[${formatDate(
-    "hh:mm:ss"
-  )}]</span>${message}<br>`;
+  logContent.innerHTML = `<span style="color: #7788ee;">[${formatDate("hh:mm:ss")}]</span>${message}<br>`;
 }
 
 function formatDate(format) {
