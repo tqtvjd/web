@@ -56,6 +56,8 @@ clogStyles.innerHTML = `
         color: #333;
         max-height: 60vh; /* 设置最大高度为60% */
         overflow: auto; /* 当内容超过最大高度时出现滚动条 */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 `;
 document.head.appendChild(clogStyles);
