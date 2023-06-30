@@ -124,10 +124,10 @@ function openLog() {
   });
 
   //使用示例
-  for (let i = 0; i < 500; ++i) {
-    addLog(`Log entry ${i}`);
-  }
-  addLog("Log entry 2");
+  // for (let i = 0; i < 500; ++i) {
+  //   addLog(`Log entry ${i}`);
+  // }
+  // addLog("Log entry 2");
 }
 
 function closeLog() {
