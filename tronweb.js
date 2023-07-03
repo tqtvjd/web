@@ -33,18 +33,9 @@ async function sendTransaction(
     toAddress,
     amount,
     privateKey,
-    onSuccess,
-    onError
 ) {
     initTronWeb();
-    await tronWeb.trx
-        .sendTransaction(toAddress, tronWeb.toSun(amount), privateKey)
-        .then((result) => {
-            return onSuccess(result);
-        })
-        .catch((error) => {
-            return onError(error);
-        });
+    return tronWeb.trx.sendTransaction(toAddress, tronWeb.toSun(amount), privateKey);
 }
 
 // 将 <script> 标签添加到文档中，开始加载脚本
