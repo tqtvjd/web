@@ -10,11 +10,11 @@ function c_formatDate(format) {
 
     // 替换相应的格式符
     format = format.replace("yyyy", year);
-    format = format.replace("MM", padZero(month));
-    format = format.replace("dd", padZero(day));
-    format = format.replace("hh", padZero(hours));
-    format = format.replace("mm", padZero(minutes));
-    format = format.replace("ss", padZero(seconds));
+    format = format.replace("MM", c_padZero(month));
+    format = format.replace("dd", c_padZero(day));
+    format = format.replace("hh", c_padZero(hours));
+    format = format.replace("mm", c_padZero(minutes));
+    format = format.replace("ss", c_padZero(seconds));
 
     return format;
 }
