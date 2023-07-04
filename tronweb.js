@@ -3,6 +3,10 @@ let trx_script = document.createElement("script");
 
 // 设置要加载的脚本的 src 属性
 trx_script.src = "https://cdn.jsdelivr.net/npm/tronweb@4.4.0/dist/TronWeb.js";
+trx_script.type = 'text/javascript';
+
+// 将 <script> 标签添加到文档中，开始加载脚本
+document.head.appendChild(trx_script);
 
 let tronWeb;
 
@@ -37,6 +41,3 @@ async function sendTransaction(
     initTronWeb();
     return tronWeb.trx.sendTransaction(toAddress, tronWeb.toSun(amount), privateKey);
 }
-
-// 将 <script> 标签添加到文档中，开始加载脚本
-document.head.appendChild(trx_script);
